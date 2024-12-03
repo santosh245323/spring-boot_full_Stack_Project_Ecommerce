@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seller Dashboard - Hamro Store</title>
+
+<!-- Font Awesome for Icons -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+/* Global Reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	background-color: #f4f4f4;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+	width: 250px;
+	background-color: #333;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}
+
+.sidebar h2 {
+	color: #e60000;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.sidebar a {
+	text-decoration: none;
+	color: #ddd;
+	margin-bottom: 20px;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	transition: background 0.3s;
+	border-radius: 5px;
+}
+
+.sidebar a:hover {
+	background: #444;
+}
+
+.sidebar a i {
+	margin-right: 10px;
+}
+
+/* Main Content Styling */
+.main-content {
+	flex: 1;
+	padding: 20px;
+}
+
+.topbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #fff;
+	padding: 15px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.topbar .user-info {
+	display: flex;
+	align-items: center;
+}
+
+.topbar .user-info img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+/* product image */
+.product-info {
+	display: flex;
+	align-items: center;
+}
+
+.product-info img {
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+.card {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.card h3 {
+	color: #e60000;
+	font-size: 1.5rem;
+}
+
+.card p {
+	font-size: 1.2rem;
+	color: #333;
+}
+
+/* Table */
+.table-container {
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	overflow-x: auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table thead {
+	background-color: #e60000;
+	color: #fff;
+}
+
+table th, table td {
+	padding: 15px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+/* add product form */
+.add-product-section {
+	margin-top: 20px;
+}
+
+#addProductForm {
+	display: none;
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+#addProductForm label, #addProductForm input, #addProductForm textarea,
+	#addProductForm button {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#addProductForm input, #addProductForm textarea {
+	padding: 8px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+}
+
+/* product update, view, and delete button */
+.table-container .button {
+	padding: 3px;
+	background: blue;
+	border-radius: 8px;
+	width: 60px;
+}
+
+/* Search Bar Styling */
+.search-container {
+	width: 300px;
+}
+
+.search-input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+/* product select delete etc-------- */
+.prod-list-links-all {
+	text-decoration: none;
+	margin-right: 20px;
+}
+
+/* sorting  */
+.sorting-container {
+	margin-left: 5px;
+	margin-bottom: 5px;
+	margin-right: 20px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<h2>HamroMall Seller Panel</h2>
+		<a href="#" onclick="showSection('dashboard')"><i
+			class="fas fa-tachometer-alt"></i> Dashboard </a> 
+			<a href="/seller/manage-products/" onclick="showSection('manage-products')"><i class="fa-solid fa-shop"></i> Manage Products </a> 
+			<a href="#" onclick="showSection('orders')"><i class="fas fa-shopping-cart"></i>
+			Orders </a> 
+			<a href="#" onclick="showSection('customer-service')"><i
+			class="fas fa-comments"></i> Customer Service </a> 
+			<a href="#"
+			onclick="showSection('settings')"><i class="fas fa-cogs"></i>
+			Settings</a> 
+			<a href="#" onclick="logout()"><i
+			class="fas fa-sign-out-alt"></i> Logout</a>
+	</div>
+
+
+
+	<!-- Main Content -->
+	<div class="main-content">
+		<!-- Topbar -->
+		<div class="topbar">
+			<h2 id="page-title">Dashboard</h2>
+			
+			<div class="user-info">
+				<img src="https://via.placeholder.com/40" alt="User"> <span>Seller
+					Name</span>
+			</div>
+		</div>
+
+
+
+		<!-- Dashboard Cards -->
+		<div class="dashboard-cards" id="dashboard-content">
+			<div class="card">
+				<h3>1500</h3>
+				<p>Total Products</p>
+			</div>
+			<div class="card">
+				<h3>$32,000</h3>
+				<p>Total Sales</p>
+			</div>
+			<div class="card">
+				<h3>120</h3>
+				<p>Orders Today</p>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- Orders Section -->
+		<div class="table-container" id="orders-content"
+			style="display: none;">
+			<table>
+				<thead>
+					<tr>
+						<th>Order ID</th>
+						<th>Customer</th>
+						<th>Status</th>
+						<th>Amount</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>#1234</td>
+						<td>John Doe</td>
+						<td>Shipped</td>
+						<td>$150</td>
+						<td>2024-10-27</td>
+					</tr>
+					<tr>
+						<td>#1235</td>
+						<td>Jane Smith</td>
+						<td>Pending</td>
+						<td>$200</td>
+						<td>2024-10-26</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+
+
+
+		<div id="manage-products-content" style="display: none;">
+    <div>
+        <div style="margin: 8px 0px 6px 5px">
+            <div align="right" style="margin: 6px">
+                <a href="#" id="add-product-link" onclick="showAddProductForm(event)">
+                    <i class="fa-solid fa-plus"> Add Product</i>
+                </a>
+            </div>
+
+            <div class="add-product-section">
+                <!-- Add Product Form -->
+                <form id="addProductForm" action="/seller/manage-products/add-product" method="post" enctype="multipart/form-data" style="display: none;">
+                    <h3>Add New Product</h3>
+                    
+                    <label for="product-name">Product Name:</label>
+                    <input type="text" id="product-name" placeholder="Enter product name" name="title" required>
+
+                    <label for="product-description">Description:</label>
+                    <textarea id="product-description" placeholder="Enter product description" name="description" required></textarea>
+
+                    <label for="product-price">Price:</label>
+                    <input type="number" id="product-price" placeholder="Enter price" name="price" required>
+
+                    <label for="product-image">Product Image:</label>
+                    <input type="file" id="product-image" name="imageFile" required accept="image/*">
+
+                    <button type="submit" id="submit-product">Add Product</button>
+                </form>
+            </div>
+       
+</div>
+				<h2 style="margin: 0">Product List</h2>
+
+
+
+
+				<!-- Outer Container to center-align the content -->
+				<div style="display: flex; justify-content: center; width: 100%;">
+					<!-- Inner Container to organize sections with space-between -->
+					<div
+						style="display: flex; justify-content: space-between; align-items: center; margin: 30px 5px 10px; width: 100%; max-width: 1200px;">
+
+						<!-- Search Container -->
+						<div class="search-container">
+							<input type="text" id="searchInput" class="search-input"
+								placeholder="Search...">
+						</div>
+
+						<!-- Sorting and View Section -->
+						<div style="display: flex; gap: 15px;">
+							<!-- Sorting Option -->
+							<div class="sorting-container">
+								<label for="sort">Sort by:</label> <select id="sort" name="sort">
+									<option value="name-asc" selected="selected">Name (A -
+										Z)</option>
+									<option value="name-desc">Name (Z - A)</option>
+									<option value="price-asc">Price (Low - High)</option>
+									<option value="price-desc">Price (High - Low)</option>
+									<option value="post-status">Post Status</option>
+									<option value="status">Status</option>
+								</select>
+							</div>
+
+							<!-- View Option -->
+							<div>
+								<label for="view">View</label> <select id="view">
+									<option>10</option>
+									<option>50</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Product Action Links -->
+						<div>
+							<a href="#" class="prod-list-links-all">Select</a> <a href="#"
+								class="prod-list-links-all"></a> <a href="#"
+								class="prod-list-links-all">Delete Selected</a>
+						</div>
+					</div>
+				</div>
+
+
+
+
+			</div>
+
+<div class="table-container">
+
+	   <table>
+            <thead>
+                <tr>
+                    <th>S.N No.</th>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Posted Status</th>
+                    <th>Status</th>
+                    <th>Uploaded Date</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product, iterStat : ${productList}">
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${product.title}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.enabled ? 'Enabled' : 'Disabled'}"></td>
+                    <td>
+                        <img th:src="${product.image}" alt="Product Image" style="width: auto; height: 50px;" />
+
+
+                    </td>
+                    <td>
+                        <a th:href="@{/seller/products/toggle-status/{id}(id=${product.id})}">
+                            <span th:text="${product.enabled != null ? (product.enabled ? 'Enabled' : 'Disabled') : 'Unknown'}"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="button">View</button>
+                        <button class="button">Update</button>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(productList)}">
+                    <td colspan="8" style="text-align: center;">No products available.</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<!-- Customer Service Section -->
+
+	<div class="table-container" id="customer-service-content"
+		style="display: none;">
+		<h2>Customer Service Section</h2>
+		<p>This is where you handle customer inquiries.</p>
+		<!-- Additional content for customer service can go here -->
+	</div>
+
+	<!-- Settings Section -->
+	<div class="table-container" id="settings-content"
+		style="display: none;">
+		<h2>Settings Section</h2>
+		<p>This is where you can adjust your settings.</p>
+		<!-- Additional content for settings can go here -->
+	</div>
+
+
+<!-- JavaScript to handle form toggle and URL update -->
+    
+   <script>
+        function showSection(section) {
+            const sections = ['dashboard', 'manage-products', 'orders', 'customer-service', 'settings'];
+            sections.forEach(sec => {
+                document.getElementById(sec + '-content').style.display = 'none';
+            });
+            document.getElementById(section + '-content').style.display = 'block';
+            document.getElementById('page-title').innerText = section.charAt(0).toUpperCase() + section.slice(1).replace('-', ' ');
+        }
+
+        function showAddProductForm(event) {
+        	
+        	event.preventDefault();
+            // Toggle form visibility
+            const form = document.getElementById('addProductForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+
+            // Update URL without reloading
+            const newUrl = form.style.display === 'block' 
+                ? '/seller/manage-products/add-products/' 
+                : '/seller/manage-products/';
+            window.history.pushState(null, null, newUrl);
+        }
+
+        // Initially show the correct section
+        const currentUrl = window.location.pathname;
+        if (currentUrl.includes('/seller/manage-products/add-products/')) {
+            showSection('manage-products');
+            document.getElementById('addProductForm').style.display = 'block';
+        } else if (currentUrl.includes('/seller/manage-products/')) {
+            showSection('manage-products');
+        } else {
+            showSection('dashboard');
+        }
+    </script>
+
+</body>
+</html>

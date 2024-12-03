@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        /* General Font */
+        body {
+         margin:0;
+         padding:0;   
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #e60000;
+            color: black;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .navbar i{
+        margin-right: 3px;
+        
+        }
+
+        /* Logo styling */
+        .logo a {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .logo a:hover {
+            color: #fff;
+        }
+
+        .logo p {
+            margin: 0;
+            padding: 0;
+            color: #ffe6e6;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover effect */
+        .logo:hover p {
+            transform: scale(1.1);
+        }
+
+        /* Navbar links */
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar a:hover {
+            color: black;
+        }
+
+        /* Seller Login and Become a Seller buttons */
+        .seller {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            display: flex;
+            gap: 15px;
+            margin: 5px;
+            padding: 0;
+        }
+        
+        .seller a{
+        
+        margin:0;
+        padding:0;}
+
+        .seller p {
+            font-size: 13px;
+            font-weight:700;
+            cursor: pointer;
+           
+        }
+
+        .becamea-a-seller:hover {
+            color: #ccc;
+        }
+
+        /* Search bar */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .search-bar input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            width: 350px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #555;
+            color: white;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        /* Cart icon */
+        .cart_main {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart_main .cart {
+            display: flex;
+            position: relative;
+            padding: 12px;
+            margin-right: 20px;
+            
+        }
+
+        .cart i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .shopping_cart_badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Login link */
+        .login a {
+            font-weight: 600;
+            color: #4a5568;
+            padding: 12px;
+        }
+        .login i{
+        
+        margin-right: 6px;
+        }
+        
+
+        .login a:hover {
+            color: white;
+        }
+
+        /* Menu styling */
+        .menu {
+            display: flex;
+            gap: 8px;
+            margin-top:0px;
+            
+        }
+
+        .menu a {
+            font-size: 12px;
+            font-weight: 500;
+            color: #4a5568;
+           
+            
+        }
+
+        .menu a:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="container">
+            <!-- Left Section with Logo and Search Bar -->
+            <div class="left-section" style="display: flex; align-items: center;">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="/"> <i>Online</i><p>MALL</p></a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button>
+                        <span class="icon_search"><i class="fas fa-search"></i></span>Search
+                    </button>
+                </div>
+            </div>
+
+            <!-- Seller Options -->
+            <div class="seller">
+               
+                <a th:href="@{/became-a-seller}"><p class="becamea-a-seller">Become a Seller</p></a>
+                 <a th:href="@{/signin}"><p class="seller-login">Seller Login</p></a>
+            </div>
+
+            <!-- Cart and Login Section -->
+            <div class="cart_main">
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <div class="shopping_cart_badge">4</div>
+                </div>
+                <div class="login">
+                    <a th:href="@{/login}"><i class="fas fa-arrow-right-to-bracket"></i>Login</a>
+                </div>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="menu">
+                <a href="/"><i class="fas fa-house"></i>Home</a> 
+                <a href="#"><i class="fas fa-bag-shopping"></i>Shop</a> 
+                <a href="#"><i class="fas fa-list"></i>Category</a> 
+                <a href="/test">Testing</a>
+            </div>
+        </div>
+    </nav>
+
+</body>
+</html>

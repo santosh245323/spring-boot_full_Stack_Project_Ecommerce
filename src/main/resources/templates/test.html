@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Lenovo V15 Laptop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-wrapper {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .product-image-section, .product-details-section {
+            flex: 1;
+        }
+
+        .product-image-section {
+            width: 100%;
+            max-width: 395px;
+            position: relative;
+        }
+
+        .product-image-section img {
+            width: 100%;
+            max-width: 395px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .product-image-section img:hover {
+            transform: scale(1.5); /* Zoom effect */
+        }
+
+        /* Thumbnail Carousel */
+        .thumbnail-gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            position: relative;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .thumbnail-gallery img {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        /* Navigation Buttons */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .nav-button.left {
+            left: -20px;
+        }
+
+        .nav-button.right {
+            right: -20px;
+        }
+
+        .product-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        .rating-section, .brand-info {
+            font-size: 0.9em;
+            color: #007bff;
+            margin-top: 5px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: #d9534f;
+            margin-top: 10px;
+        }
+
+        .price-original {
+            font-size: 1em;
+            color: #777;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .price-discount {
+            color: #28a745;
+            font-size: 1em;
+            margin-left: 10px;
+        }
+
+        .promotion {
+            background-color: #ffc107;
+            color: #fff;
+            padding: 5px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 3px;
+        }
+
+        .color-family, .quantity-section {
+            margin-top: 15px;
+        }
+
+        .color-family img {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .quantity-control {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 100px;
+        }
+
+        .quantity-control button {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .quantity-control input {
+            width: 40px;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px;
+            font-size: 1em;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .btn-buy {
+            background-color: #d9534f;
+        }
+
+        .btn-cart {
+            background-color: #f0ad4e;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="product-wrapper">
+        <!-- Product Image Section -->
+        <div class="product-image-section">
+            <img src="https://via.placeholder.com/400" alt="Lenovo V15 Laptop" id="main-image">
+            <!-- Left and Right Navigation Buttons -->
+            <button class="nav-button left" onclick="scrollThumbnails(-1)">❮</button>
+            <button class="nav-button right" onclick="scrollThumbnails(1)">❯</button>
+            <div class="thumbnail-gallery" id="thumbnail-gallery">
+                <img src="https://via.placeholder.com/60" alt="Thumbnail 1" onclick="changeImage(this)">
+                <img src="https://via.placeholder.com/60" alt="Thumbnail 2" onclick="changeImage(this)">
+                <img src="https://via.placeholder.com/60" alt="Thumbnail 3" onclick="changeImage(this)">
+                <img src="https://via.placeholder.com/60" alt="Thumbnail 4" onclick="changeImage(this)">
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="product-details-section">
+            <h1 class="product-title">Lenovo V15 Celeron 4GB RAM 256GB SSD, 15.6 inch HD Display</h1>
+            <div class="rating-section">★★★★☆ 22 Ratings | 82 Answered Questions</div>
+            <div class="brand-info">Brand: <a href="#">No Brand</a> | <a href="#">More Laptops from No Brand</a></div>
+
+            <div class="product-price">
+                Rs. 33,998
+                <span class="price-original">Rs. 45,000</span>
+                <span class="price-discount">-24%</span>
+            </div>
+
+            <div class="promotion">Min. spend Rs. 499</div>
+
+            <div class="color-family">
+                <p>Color Family: <strong>Black</strong></p>
+                <img src="https://via.placeholder.com/40" alt="Color Option">
+            </div>
+
+            <div class="quantity-section">
+                <p>Quantity</p>
+                <div class="quantity-control">
+                    <button>-</button>
+                    <input type="text" value="1">
+                    <button>+</button>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="#" class="btn btn-buy">Buy Now</a>
+                <a href="#" class="btn btn-cart">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Change main image on thumbnail click
+    function changeImage(thumbnail) {
+        document.getElementById('main-image').src = thumbnail.src;
+    }
+
+    // Thumbnail scroll function
+    function scrollThumbnails(direction) {
+        const gallery = document.getElementById('thumbnail-gallery');
+        const scrollAmount = direction * 70; // Adjust scroll step
+        gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

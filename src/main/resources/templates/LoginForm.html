@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+
+<!-- Font Icon -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet"
+	href="/loginAndSignup/fonts/material-icon/css/material-design-iconic-font.min.css">
+<!-- Main css -->
+<style>
+/* Your existing styles */
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	color: red;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	position: relative;
+	width: 100%;
+	max-width: 1400px;
+	box-sizing: border-box;
+}
+
+.content {
+	display: flex;
+	background-color: white;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px -4px 8px
+		rgba(0, 0, 0, 0.2), 4px 0px 8px rgba(0, 0, 0, 0.2), -4px 0px 8px
+		rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	width: 100%;
+	max-width: 950px;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	flex-wrap: wrap;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.back-button {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 16px;
+	color: #000;
+	text-decoration: none;
+}
+
+.back-button i {
+	font-size: 25px;
+}
+
+.content2, .login-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 400px;
+}
+
+.login-box {
+	margin-top: 20px;
+}
+
+.content2 {
+	order: 1;
+}
+
+.login-box {
+	order: 2;
+}
+
+.login-content-image img {
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-width: 350px;
+}
+
+.already-account-create {
+	text-align: center;
+}
+
+.already-account-create a {
+	color: #e60000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.login-header {
+	text-align: center;
+	margin-top: 0px;
+}
+
+.login-box .login-header i {
+	font-size: 50px;
+}
+
+.login-header h1 {
+	margin: 0;
+}
+
+.form {
+	margin-top: 0px;
+}
+
+.form-group {
+	position: relative;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.form-group input {
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #999;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	outline: none;
+	appearance: unset !important;
+}
+
+.forgot-password-link {
+	margin-bottom: 20px;
+	text-align: right;
+	color: #e60000;
+	width: 100%;
+}
+
+.form-submit-button {
+	background: red;
+	color: #fff;
+	padding: 12px 25px;
+	border-radius: 5px;
+	margin-top: 20px;
+	cursor: pointer;
+	width: 100%;
+}
+
+.form-group label i {
+	margin-right: 10px;
+	display: block;
+	text-align: left;
+	margin-top: 23px;
+	position: absolute;
+}
+
+body {
+	color: #e60000; /* Set the text color */
+}
+
+.form-submit-button {
+	background-color: #e60000; /* Button background color */
+}
+
+.already-account-create a, .forgot-password-link {
+	color: #e60000; /* Link color */
+}
+
+.error-msg {
+	background-color: #fce4e4;
+	border: 1px solid #fcc2c3;
+	color: #cc0033;
+	padding: 8px 12px;
+	margin-bottom: 8px;
+	border-radius: 5px;
+	text-align: center;
+	width: 95%;
+}
+
+.error-msg span {
+	color: #cc0033;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	text-shadow: 1px 1px rgba(250, 250, 250, .3);
+}
+
+.eye-icon {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="content">
+			<a th:href="@{/}" class="back-button"><i
+				class="fa-solid fa-arrow-left-long"></i></a>
+
+			<div class="content2">
+				<div class="login-content-image">
+					<img th:src="@{/img/ecom.png}" alt="Sign up image">
+				</div>
+				
+				
+
+				<span>Don't have an account?</span>
+				<div class="already-account-create">
+					<a th:href="@{/registration}">Create an account</a>
+				</div>
+			</div>
+
+			<div class="login-box">
+				<div class="login-header">
+					<i class="fa-solid fa-circle-user"></i>
+					<h1 class="form-title sign">Login</h1>
+				</div>
+
+
+
+				<form th:action="@{/login}" method="POST" class="form">
+
+
+					<div th:if="${message}" class="error-msg">
+						<span th:text="${message}"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="identifier"><i class="fa-solid fa-user"></i>
+							Username</label> <input type="text" name="username" id="your_name"
+							placeholder="email/phone" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="password"><i class="fa-solid fa-lock"></i>
+							Password</label> <input type="password" name="password" id="your_pass"
+							placeholder="********" required="required" /> <i
+							class="fa-solid fa-eye eye-icon" id="togglePassword"></i>
+					</div>
+					<div class="forgot-password-link">
+						<a href="#">Forgot password</a>
+					</div>
+					<input type="submit" class="form-submit-button" value="login" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const togglePassword = document.querySelector('#togglePassword');
+		const password = document.querySelector('#your_pass');
+
+		togglePassword.addEventListener('click', function(e) {
+			const type = password.getAttribute('type') === 'password' ? 'text'
+					: 'password';
+			password.setAttribute('type', type);
+			this.classList.toggle('fa-eye-slash');
+		});
+	</script>
+	
+<script>
+    window.onload = function() {
+        // Check if the page is being loaded for the first time
+        if (performance.navigation.type === 1) {
+            // This means the page was refreshed
+            window.location.href = '/login'; // Redirect to login
+        }
+    };
+</script>
+
+	
+	
+</body>
+</html>

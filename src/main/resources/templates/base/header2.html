@@ -1,0 +1,73 @@
+<!-- /templates/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="header2">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamro Store</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+    <!-- Custom CSS for header styling -->
+    <style type="text/css">
+        /* Header styling */
+        header {
+            background-color: #e60000; /* Brand red color */
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Logo styling */
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .logo a:hover {
+            color: #fff; /* Keeps logo color consistent on hover */
+        }
+
+        
+        
+
+        .logo p {
+            margin: 0;
+            padding: 0;
+            color: #ffe6e6;
+           
+            transition: transform 0.3s ease;
+            font-size: 2rem; /* Slightly smaller than "Online" */
+        }
+
+        /* Hover effect */
+        .logo:hover p {
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="/">
+                <i>Online</i><p>MALL</p>
+            </a>
+        </div>
+    </header>
+</body>
+</html>

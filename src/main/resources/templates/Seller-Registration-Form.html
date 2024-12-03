@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seller Registration Page</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	color: red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	overflow: hidden;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	width: 100%;
+	max-width: 1200px;
+	box-sizing: border-box;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.content {
+	display: flex;
+	background-color: white;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	width: 100%;
+	max-width: 900px;
+	padding: 20px;
+	box-sizing: border-box;
+	flex-wrap: wrap;
+	position: relative;
+}
+
+.content2, .registration-box {
+	width: 100%;
+	max-width: 400px;
+	text-align: center;
+}
+
+.content2 {
+	margin-top: 60px;
+	padding-right: 30px;
+}
+
+.registration-header i, h1 {
+	margin: 0;
+}
+
+.registration-header i {
+	font-size: 50px;
+}
+
+.content2 a {
+	font-weight: bolder;
+	text-decoration: none;
+}
+
+.content2 img {
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.form-group {
+	position: relative;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 12px 10px;
+	border: none;
+	border-bottom: 1px solid #999;
+	box-sizing: border-box;
+	outline: none;
+	transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+	border-bottom: 1px solid #e60000;
+}
+
+.form-group label {
+	position: absolute;
+	left: 10px;
+	top: 12px;
+	pointer-events: none;
+	font-size: 16px;
+	color: #999;
+	transition: all 0.3s ease;
+}
+
+.form-group input:focus+label, .form-group input:not(:placeholder-shown)+label
+	{
+	top: -10px;
+	font-size: 12px;
+	color: black;
+	background-color: white;
+	padding: 0 0px;
+}
+
+.form-submit-button {
+	background-color: #e60000;
+	color: #fff;
+	padding: 12px 25px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100%;
+	margin-top: 10px;
+	border: none;
+}
+
+.show-password {
+	display: flex;
+	align-items: center;
+	margin-top: -10px;
+	color: #999;
+	font-size: 14px;
+}
+
+.back-link {
+	display: block;
+	margin-top: 20px;
+	color: #e60000;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.back-link:hover {
+	text-decoration: underline;
+}
+
+.back-button {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 16px;
+	color: #000;
+	text-decoration: none;
+}
+
+.back-button i {
+	font-size: 25px;
+}
+
+.terms-title {
+	margin-top: 20px;
+	font-size: 14px;
+	color: #666;
+}
+
+.error-message {
+	font-size: 12px;
+	margin-top: 4px;
+	color: red;
+	text-align: left;
+	display: block;
+	padding-left: 10px;
+}
+</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="content">
+			<a th:href="@{/signin}" class="back-button"><i class="fa-solid fa-arrow-left-long"></i></a>
+
+			<div class="content2">
+				<img th:src="@{/img/ecom.png}" alt="Sign up image"> 
+				<span>Already have an account?</span>
+				<div class="already-account-create">
+					<a th:href="@{/signin}">Login here</a>
+				</div>
+			</div>
+
+			<div class="registration-box">
+				<div class="registration-header">
+					<i class="fa-solid fa-user-tie"></i>
+					<h1 class="form-title sign">Seller Registration</h1>
+				</div>
+
+				<form th:action="@{/seller-registration}" method="POST" id="sellerRegistrationForm">
+					
+
+					<div class="form-group">
+						<input type="text" name="fullName" id="full_name" placeholder=" " required /> 
+						<label for="full_name">Full Name</label>
+					</div>
+					
+					<div class="form-group">
+						<input type="email" name="email" id="email" placeholder=" " required /> 
+						<label for="email">Email Address</label> 
+						<span id="emailError" class="error-message"></span>
+					</div>
+
+					<div class="form-group">
+						<input type="tel" name="phone" id="phone" placeholder=" " required /> 
+						<label for="phone">Phone Number</label> 
+						<span id="phoneError" class="error-message"></span>
+					</div>
+
+					
+
+					<div class="form-group">
+						<input type="password" name="password" id="password" placeholder=" " required /> 
+						<label for="password">Password</label>
+					</div>
+
+					<div class="form-group">
+						<input type="password" name="confirmPassword" id="confirmPassword" placeholder=" " required /> 
+						<label for="confirmPassword">Confirm Password</label> 
+						<span id="passwordError" class="error-message"></span>
+					</div>
+
+					<div class="show-password">
+						<input type="checkbox" id="showPasswordToggle" /> 
+						<label for="showPasswordToggle" style="margin-left: 8px;">Show Passwords</label>
+					</div>
+
+					<input type="submit" class="form-submit-button" value="Register" />
+				</form>
+
+				<div class="terms-title">
+					<p>
+						By registering, you agree to our <a href="#">Terms and Services</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	document.addEventListener('DOMContentLoaded', function() {
+	    const form = document.getElementById("sellerRegistrationForm");
+	    
+	    const emailField = document.getElementById("email");
+	    const emailError = document.getElementById("emailError");
+	    
+	    const phoneField = document.getElementById("phone");
+	    const phoneError = document.getElementById("phoneError");
+	    
+	    const passwordField = document.getElementById("password");
+	    const confirmPasswordField = document.getElementById("confirmPassword");
+	    const passwordError = document.getElementById("passwordError");
+	    const showPasswordToggle = document.getElementById("showPasswordToggle");
+
+	    let emailExists = false;
+	    let phoneExists = false;
+
+	    // Real-time validation for email with Seller role
+	    emailField.addEventListener("input", function() {
+	        const email = emailField.value;
+	        const role = 'Seller'; // Set role to Seller
+	        if (email) {
+	            fetch(`/check-seller?email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}`)
+	                .then(response => response.json())
+	                .then(exists => {
+	                    emailExists = exists;
+	                    emailError.textContent = exists ? "*Email already exists for Seller*" : "";
+	                })
+	                .catch(error => console.error("Error checking email:", error));
+	        } else {
+	            emailError.textContent = "";
+	            emailExists = false;
+	        }
+	    });
+
+	    // Real-time validation for phone with Seller role
+	    phoneField.addEventListener("input", function() {
+	        const phone = phoneField.value;
+	        const role = 'Seller'; // Set role to Seller
+	        if (phone) {
+	            fetch(`/check-seller?phone=${encodeURIComponent(phone)}&role=${encodeURIComponent(role)}`)
+	                .then(response => response.json())
+	                .then(exists => {
+	                    phoneExists = exists;
+	                    phoneError.textContent = exists ? "*Phone already exists for Seller*" : "";
+	                })
+	                .catch(error => console.error("Error checking phone:", error));
+	        } else {
+	            phoneError.textContent = "";
+	            phoneExists = false;
+	        }
+	    });
+
+	    // Password visibility toggle
+        showPasswordToggle.addEventListener("change", function() {
+            const type = this.checked ? "text" : "password";
+            passwordField.type = type;
+            confirmPasswordField.type = type;
+        });
+
+        // Real-time password match validation
+        confirmPasswordField.addEventListener("input", () => {
+            const passwordValue = passwordField.value;
+            const confirmPasswordValue = confirmPasswordField.value;
+
+            passwordError.textContent = passwordValue.startsWith(confirmPasswordValue) ? "" :
+                confirmPasswordValue && passwordValue !== confirmPasswordValue ? "Passwords do not match!" : "";
+        });
+
+
+	    
+     // Form submission validation
+        form.addEventListener("submit", function(event) {
+           let hasError = false;
+
+           if (!emailField.value) {
+               emailError.textContent = "Email is required!";
+               hasError = true;
+           }
+
+           if (!passwordField.value || passwordField.value !== confirmPasswordField.value) {
+               passwordError.textContent = passwordField.value ? "Passwords do not match!" : "Password is required!";
+               hasError = true;
+           }
+
+           if (emailExists) {
+               emailError.textContent = "Email already exists!";
+               hasError = true;
+           }
+
+           if (phoneExists) {
+               phoneError.textContent = "Phone number already exists!";
+               hasError = true;
+           }
+
+           if (hasError) event.preventDefault();
+       }); 
+	});
+
+</script>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+
+</body>
+</html>

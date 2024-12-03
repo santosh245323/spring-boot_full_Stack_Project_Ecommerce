@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Became a selller</title>
+    
+   
+    
+    <style>
+        body {
+          
+          
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+     
+    
+        /* Flexbox layout and centering */
+        .container-fluid {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 100px; /* Space for footer */
+            color: #e60000;
+        }
+
+       
+
+     
+        
+        
+         .login {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+}
+
+ .login a {
+	font-weight: 600;
+	color: #4a5568;
+	text-decoration: none;
+}
+
+ .login a:hover {
+	color: white;
+}
+        
+        .login i{
+        
+        margin-right: 5px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        h1 {
+            color: #d32f2f; /* Primary red for the main heading */
+        }
+        .seller-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .seller-card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between;
+            width: 210px;
+        }
+        .seller-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .seller-card h3 {
+            color: #d32f2f; /* Red brand color for card titles */
+            text-align: center;
+            margin-top: 5px	;
+            padding:0;
+        }
+        .seller-card ul {
+            padding-left: 20px;
+        }
+        .seller-card ul li {
+            margin-bottom: 10px;
+            color: #555;
+            list-style: none;
+            text-indent: -20px;
+            font-size: 14px;
+        }
+        .seller-card ul li:before {
+            content: '✔';
+            color: #d32f2f; /* Red brand color for checkmarks */
+            margin-right: 8px;
+        }
+        .seller-card button {
+            background-color: #d32f2f; /* Red brand color for buttons */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: auto;
+            margin-bottom : 20px;
+            width: 100%;
+            
+            
+        }
+        .seller-card button:hover {
+            background-color: #b71c1c; /* Darker shade of red for hover effect */
+        }
+        .state-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+           height:auto;
+           width:auto;
+           
+           
+            margin: 0 auto;
+            
+            
+        }
+        .state-logo img {
+         
+            width: 50px;
+            
+              border-radius: 50%;
+               
+         
+         
+        }
+        p {
+        margin:0;
+            font-size: 15px;
+            line-height: 1.5; /* Adjust line height for better readability */
+        }
+    </style>
+</head>
+<body>
+
+
+  <!-- Header with Home and User Icons -->
+    <header th:insert="base/header2 :: header2"> </header>
+    
+
+<div class="container">
+
+     
+    <h1>Selling Made Simple</h1>
+    <h2>Become a seller today</h2>
+
+    <div class="seller-options">
+
+        <!-- DarazMall Seller -->
+        <div class="seller-card">
+        
+            <div class="state-logo">
+                <img src="https://via.placeholder.com/40" alt="DarazMall Logo">
+            </div>   
+            <h3>OnlineMALL Seller</h3>
+            <p>OnlineMall offers to consumers quality shopping experience with 100% authentic products. We offer trusted brands with superior delivery and return experience.</p>
+            <ul>
+                <li>You are a brand owner or authorized distributor</li>
+                <li>Exclusive access to dedicated HamroMall campaigns</li>
+                <li>Benefit from higher overall search ranking</li>
+                <li>Access to thousands of customers</li>
+                <li>Pay commission only when you sell</li>
+            </ul>
+           
+            <button >Comming Soon</button>
+        </div>
+
+        <!-- Local Seller -->
+        <div class="seller-card">
+            <div class="state-logo">
+                <img src="https://cdn.britannica.com/70/2970-050-796F522C/Flag-Nepal.jpg" alt="Local Seller Logo">
+            </div>   
+            <h3>Local Seller</h3>
+            <p>HamroMall offers to consumers the largest variety of assortment from reliable local sellers who create a delightful shopping experience.</p>
+            <ul>
+                <li>You are based locally</li>
+                <li>Access to multiple seller tools for your store</li>
+                <li>Pay commission only when you sell</li>
+            </ul>
+            
+            <a href="/seller-registration">
+            <button>Sign up as Local Seller</button></a>
+        </div>
+
+        <!-- Global Seller -->
+        <div class="seller-card">
+            <div class="state-logo">
+                <img src="https://via.placeholder.com/40" alt="Global Seller Logo">
+            </div>   
+            <h3>Global Seller</h3>
+            <p>HamroMall Global offers to consumers access to the widest assortment from overseas sellers.</p>
+            <ul>
+                <li>You are based outside of Nepal</li>
+                <li>You are a registered business</li>
+                <li>Access to multiple seller tools for your store</li>
+                <li>Pay commission only when you sell</li>
+            </ul>
+            <button>Comming soon</button>
+        </div>
+
+        <!-- Digital Goods Seller -->
+        <div class="seller-card">
+            <div class="state-logo">
+                <img src="https://via.placeholder.com/40" alt="Digital Goods Seller Logo">
+            </div>   
+            <h3>Digital Goods Seller</h3>
+            <p>HamroMall offers to consumers the widest variety of digital goods & services from local sellers.</p>
+            <ul>
+                <li>You are based locally</li>
+                <li>Access to multiple seller tools for your store</li>
+                <li>Pay commission only when you sell</li>
+            </ul>
+            <button>Comming soon</button>
+        </div>
+
+    </div>
+</div>
+
+
+<footer th:insert="base/footer :: footer"></footer>
+
+</body>
+</html>
